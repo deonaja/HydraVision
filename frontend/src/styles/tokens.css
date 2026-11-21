@@ -1,0 +1,76 @@
+:root {
+  /* Meja Rias Linen & Lempung palette */
+  --linen-ground: #ede5d8;
+  --linen-soft: #f3ece2;
+  --linen-deep: #e2d7c6;
+  --linen-rail: #e7decb;
+
+  --ceramic-ivory: #faf6ef;
+  --ceramic-dish: #f6f0e6;
+  --ceramic-border: #d7cab8;
+  --ceramic-border-strong: #c4b39c;
+
+  --clay-rim: #b25a37;
+  --clay-body: #a34d2d;
+  --clay-recess: #904225;
+  --clay-deep: #74321a;
+  --clay-tint: #f5e6de;
+  --clay-border: #d4967b;
+
+  --indigo-primary: #234b72;
+  --indigo-hover: #1b3c5d;
+  --indigo-deep: #152f49;
+  --indigo-tint: #e6eef5;
+  --indigo-border: #adc3d8;
+
+  --ink-espresso: #211b17;
+  --ink-umber: #51463e;
+  --ink-muted: #6c5f55;
+  --ink-on-dark: #faf6ef;
+  --ink-on-clay: #fbf6f0;
+
+  /* Semantic state tokens derived from the world */
+  --state-hydrated-bg: #e6eef5;
+  --state-hydrated-fg: #1b3c5d;
+  --state-hydrated-border: #a5bfd6;
+
+  --state-dry-bg: #f6e4dc;
+  --state-dry-fg: #83371b;
+  --state-dry-border: #d9a087;
+
+  --state-success-bg: #e4efe9;
+  --state-success-fg: #1f543b;
+  --state-success-border: #a7cbb8;
+
+  --state-danger-bg: #f8e4e1;
+  --state-danger-fg: #8e241b;
+  --state-danger-border: #dda098;
+
+  --state-warning-bg: #f6ecda;
+  --state-warning-fg: #724b12;
+  --state-warning-border: #d8bc89;
+
+  /* Typography */
+  --font-display: "Bricolage Grotesque", "Onest", sans-serif;
+  --font-ui: "Onest", sans-serif;
+
+  /* Radii — crisp architectural ceramic & terracotta edges */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 10px;
+  --radius-pill: 999px;
+
+  /* Tactile ceramic & matte clay depth (offset + soft blur, never neon halos) */
+  --shadow-ceramic: 0 2px 6px rgba(33, 27, 23, 0.06), 0 8px 20px rgba(33, 27, 23, 0.05);
+  --shadow-tray: 0 12px 26px rgba(48, 28, 18, 0.18), 0 3px 8px rgba(48, 28, 18, 0.14);
+  --shadow-tray-well: inset 0 3px 8px rgba(56, 20, 9, 0.32), inset 0 1px 0 rgba(56, 20, 9, 0.24), inset 0 -1px 0 rgba(235, 165, 130, 0.16);
+  --shadow-dish: 0 4px 12px rgba(48, 22, 11, 0.22), 0 1px 2px rgba(48, 22, 11, 0.14);
+  --shadow-popover: 0 18px 42px rgba(33, 27, 23, 0.18), 0 4px 12px rgba(33, 27, 23, 0.08);
+
+  /* Spacing & motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur-mid: 240ms;
+  --dur-slow: 420ms;
+}

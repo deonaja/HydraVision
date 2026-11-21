@@ -1,0 +1,685 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-20T17:40:00Z",
+  "title": "Design System: HydraVision",
+  "extensions": {
+    "colorMeta": {
+      "indigo-primary": {
+        "role": "primary",
+        "displayName": "Mineral Indigo",
+        "canonical": "#234b72",
+        "tonalRamp": [
+          "oklch(22% 0.055 247)",
+          "oklch(31% 0.075 247)",
+          "oklch(41% 0.088 247)",
+          "oklch(52% 0.082 247)",
+          "oklch(64% 0.068 247)",
+          "oklch(76% 0.048 247)",
+          "oklch(88% 0.026 247)",
+          "oklch(95% 0.014 247)"
+        ]
+      },
+      "indigo-hover": {
+        "role": "primary",
+        "displayName": "Deep Indigo",
+        "canonical": "#1b3c5d",
+        "tonalRamp": [
+          "oklch(19% 0.050 248)",
+          "oklch(28% 0.070 248)",
+          "oklch(35% 0.079 248)",
+          "oklch(46% 0.078 248)",
+          "oklch(59% 0.064 248)",
+          "oklch(72% 0.046 248)",
+          "oklch(85% 0.025 248)",
+          "oklch(94% 0.012 248)"
+        ]
+      },
+      "indigo-tint": {
+        "role": "primary",
+        "displayName": "Indigo Mist",
+        "canonical": "#e6eef5",
+        "tonalRamp": [
+          "oklch(22% 0.032 245)",
+          "oklch(34% 0.042 245)",
+          "oklch(46% 0.045 245)",
+          "oklch(58% 0.042 245)",
+          "oklch(70% 0.035 245)",
+          "oklch(82% 0.024 245)",
+          "oklch(90% 0.016 245)",
+          "oklch(95% 0.012 245)"
+        ]
+      },
+      "clay-body": {
+        "role": "secondary",
+        "displayName": "Matte Terracotta",
+        "canonical": "#a34d2d",
+        "tonalRamp": [
+          "oklch(23% 0.065 39)",
+          "oklch(33% 0.095 39)",
+          "oklch(43% 0.115 39)",
+          "oklch(51% 0.120 39)",
+          "oklch(62% 0.105 39)",
+          "oklch(74% 0.078 39)",
+          "oklch(86% 0.044 39)",
+          "oklch(94% 0.020 39)"
+        ]
+      },
+      "clay-recess": {
+        "role": "secondary",
+        "displayName": "Recessed Clay",
+        "canonical": "#904225",
+        "tonalRamp": [
+          "oklch(21% 0.060 39)",
+          "oklch(31% 0.088 39)",
+          "oklch(41% 0.105 39)",
+          "oklch(47% 0.111 39)",
+          "oklch(59% 0.096 39)",
+          "oklch(72% 0.070 39)",
+          "oklch(85% 0.038 39)",
+          "oklch(94% 0.018 39)"
+        ]
+      },
+      "linen-ground": {
+        "role": "neutral",
+        "displayName": "Oat Linen Ground",
+        "canonical": "#ede5d8",
+        "tonalRamp": [
+          "oklch(22% 0.012 78)",
+          "oklch(34% 0.016 78)",
+          "oklch(48% 0.019 78)",
+          "oklch(62% 0.020 78)",
+          "oklch(74% 0.020 78)",
+          "oklch(84% 0.019 78)",
+          "oklch(92% 0.018 78)",
+          "oklch(97% 0.010 78)"
+        ]
+      },
+      "linen-soft": {
+        "role": "neutral",
+        "displayName": "Soft Linen",
+        "canonical": "#f3ece2",
+        "tonalRamp": [
+          "oklch(23% 0.010 76)",
+          "oklch(35% 0.014 76)",
+          "oklch(49% 0.017 76)",
+          "oklch(63% 0.018 76)",
+          "oklch(75% 0.017 76)",
+          "oklch(86% 0.016 76)",
+          "oklch(94% 0.014 76)",
+          "oklch(98% 0.008 76)"
+        ]
+      },
+      "linen-deep": {
+        "role": "neutral",
+        "displayName": "Deep Linen",
+        "canonical": "#e2d7c6",
+        "tonalRamp": [
+          "oklch(21% 0.015 78)",
+          "oklch(33% 0.020 78)",
+          "oklch(47% 0.023 78)",
+          "oklch(60% 0.024 78)",
+          "oklch(73% 0.024 78)",
+          "oklch(83% 0.023 78)",
+          "oklch(88% 0.022 78)",
+          "oklch(96% 0.011 78)"
+        ]
+      },
+      "linen-rail": {
+        "role": "neutral",
+        "displayName": "Linen Rail",
+        "canonical": "#e7decb",
+        "tonalRamp": [
+          "oklch(21% 0.015 84)",
+          "oklch(33% 0.020 84)",
+          "oklch(47% 0.023 84)",
+          "oklch(61% 0.024 84)",
+          "oklch(74% 0.024 84)",
+          "oklch(84% 0.023 84)",
+          "oklch(90% 0.022 84)",
+          "oklch(96% 0.011 84)"
+        ]
+      },
+      "ceramic-ivory": {
+        "role": "neutral",
+        "displayName": "Glazed Ceramic Ivory",
+        "canonical": "#faf6ef",
+        "tonalRamp": [
+          "oklch(24% 0.008 76)",
+          "oklch(36% 0.010 76)",
+          "oklch(50% 0.012 76)",
+          "oklch(64% 0.013 76)",
+          "oklch(76% 0.012 76)",
+          "oklch(87% 0.011 76)",
+          "oklch(94% 0.010 76)",
+          "oklch(97% 0.010 76)"
+        ]
+      },
+      "ceramic-dish": {
+        "role": "neutral",
+        "displayName": "Warm Ceramic Dish",
+        "canonical": "#f6f0e6",
+        "tonalRamp": [
+          "oklch(23% 0.010 76)",
+          "oklch(35% 0.012 76)",
+          "oklch(49% 0.014 76)",
+          "oklch(63% 0.015 76)",
+          "oklch(75% 0.015 76)",
+          "oklch(86% 0.014 76)",
+          "oklch(93% 0.013 76)",
+          "oklch(96% 0.012 76)"
+        ]
+      },
+      "ceramic-border": {
+        "role": "neutral",
+        "displayName": "Stone Border",
+        "canonical": "#d7cab8",
+        "tonalRamp": [
+          "oklch(21% 0.016 74)",
+          "oklch(33% 0.021 74)",
+          "oklch(46% 0.025 74)",
+          "oklch(59% 0.026 74)",
+          "oklch(71% 0.026 74)",
+          "oklch(81% 0.025 74)",
+          "oklch(84% 0.024 74)",
+          "oklch(95% 0.012 74)"
+        ]
+      },
+      "ceramic-border-strong": {
+        "role": "neutral",
+        "displayName": "Strong Stone Border",
+        "canonical": "#c4b39c",
+        "tonalRamp": [
+          "oklch(20% 0.018 74)",
+          "oklch(32% 0.024 74)",
+          "oklch(45% 0.028 74)",
+          "oklch(58% 0.030 74)",
+          "oklch(70% 0.030 74)",
+          "oklch(77% 0.029 74)",
+          "oklch(87% 0.022 74)",
+          "oklch(95% 0.011 74)"
+        ]
+      },
+      "ink-espresso": {
+        "role": "neutral",
+        "displayName": "Espresso Ink",
+        "canonical": "#211b17",
+        "tonalRamp": [
+          "oklch(16% 0.011 52)",
+          "oklch(23% 0.014 52)",
+          "oklch(34% 0.017 52)",
+          "oklch(47% 0.018 52)",
+          "oklch(60% 0.017 52)",
+          "oklch(73% 0.014 52)",
+          "oklch(86% 0.010 52)",
+          "oklch(95% 0.006 52)"
+        ]
+      },
+      "ink-umber": {
+        "role": "neutral",
+        "displayName": "Umber Ink",
+        "canonical": "#51463e",
+        "tonalRamp": [
+          "oklch(19% 0.013 58)",
+          "oklch(29% 0.017 58)",
+          "oklch(40% 0.019 58)",
+          "oklch(51% 0.020 58)",
+          "oklch(63% 0.018 58)",
+          "oklch(75% 0.015 58)",
+          "oklch(87% 0.010 58)",
+          "oklch(95% 0.006 58)"
+        ]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Muted Umber",
+        "canonical": "#6c5f55",
+        "tonalRamp": [
+          "oklch(20% 0.014 58)",
+          "oklch(31% 0.018 58)",
+          "oklch(42% 0.020 58)",
+          "oklch(50% 0.021 58)",
+          "oklch(62% 0.019 58)",
+          "oklch(75% 0.015 58)",
+          "oklch(87% 0.010 58)",
+          "oklch(95% 0.006 58)"
+        ]
+      },
+      "ink-on-clay": {
+        "role": "neutral",
+        "displayName": "Warm Clay Ivory",
+        "canonical": "#fbf6f0",
+        "tonalRamp": [
+          "oklch(24% 0.008 68)",
+          "oklch(36% 0.010 68)",
+          "oklch(50% 0.012 68)",
+          "oklch(64% 0.013 68)",
+          "oklch(76% 0.012 68)",
+          "oklch(87% 0.011 68)",
+          "oklch(94% 0.010 68)",
+          "oklch(98% 0.009 68)"
+        ]
+      },
+      "state-hydrated-bg": {
+        "role": "tertiary",
+        "displayName": "Hydrated Tint",
+        "canonical": "#e6eef5",
+        "tonalRamp": [
+          "oklch(22% 0.032 245)",
+          "oklch(34% 0.042 245)",
+          "oklch(46% 0.045 245)",
+          "oklch(58% 0.042 245)",
+          "oklch(70% 0.035 245)",
+          "oklch(82% 0.024 245)",
+          "oklch(90% 0.016 245)",
+          "oklch(95% 0.012 245)"
+        ]
+      },
+      "state-hydrated-fg": {
+        "role": "tertiary",
+        "displayName": "Hydrated Ink",
+        "canonical": "#1b3c5d",
+        "tonalRamp": [
+          "oklch(19% 0.050 248)",
+          "oklch(28% 0.070 248)",
+          "oklch(35% 0.079 248)",
+          "oklch(46% 0.078 248)",
+          "oklch(59% 0.064 248)",
+          "oklch(72% 0.046 248)",
+          "oklch(85% 0.025 248)",
+          "oklch(94% 0.012 248)"
+        ]
+      },
+      "state-hydrated-border": {
+        "role": "tertiary",
+        "displayName": "Hydrated Border",
+        "canonical": "#a5bfd6",
+        "tonalRamp": [
+          "oklch(22% 0.035 244)",
+          "oklch(34% 0.046 244)",
+          "oklch(46% 0.050 244)",
+          "oklch(58% 0.050 244)",
+          "oklch(70% 0.046 244)",
+          "oklch(79% 0.042 244)",
+          "oklch(89% 0.024 244)",
+          "oklch(95% 0.012 244)"
+        ]
+      },
+      "state-dry-bg": {
+        "role": "tertiary",
+        "displayName": "Dry Clay Tint",
+        "canonical": "#f6e4dc",
+        "tonalRamp": [
+          "oklch(23% 0.042 40)",
+          "oklch(35% 0.056 40)",
+          "oklch(47% 0.060 40)",
+          "oklch(59% 0.056 40)",
+          "oklch(71% 0.048 40)",
+          "oklch(83% 0.034 40)",
+          "oklch(92% 0.024 40)",
+          "oklch(96% 0.014 40)"
+        ]
+      },
+      "state-dry-fg": {
+        "role": "tertiary",
+        "displayName": "Dry Clay Ink",
+        "canonical": "#83371b",
+        "tonalRamp": [
+          "oklch(20% 0.062 38)",
+          "oklch(30% 0.088 38)",
+          "oklch(43% 0.112 38)",
+          "oklch(54% 0.108 38)",
+          "oklch(65% 0.090 38)",
+          "oklch(77% 0.064 38)",
+          "oklch(88% 0.036 38)",
+          "oklch(95% 0.016 38)"
+        ]
+      },
+      "state-dry-border": {
+        "role": "tertiary",
+        "displayName": "Dry Clay Border",
+        "canonical": "#d9a087",
+        "tonalRamp": [
+          "oklch(22% 0.045 40)",
+          "oklch(34% 0.060 40)",
+          "oklch(46% 0.068 40)",
+          "oklch(58% 0.070 40)",
+          "oklch(70% 0.066 40)",
+          "oklch(76% 0.063 40)",
+          "oklch(88% 0.036 40)",
+          "oklch(95% 0.016 40)"
+        ]
+      },
+      "state-success-bg": {
+        "role": "tertiary",
+        "displayName": "Botanical Sage Tint",
+        "canonical": "#e4efe9",
+        "tonalRamp": [
+          "oklch(22% 0.032 156)",
+          "oklch(34% 0.044 156)",
+          "oklch(46% 0.048 156)",
+          "oklch(58% 0.044 156)",
+          "oklch(70% 0.036 156)",
+          "oklch(82% 0.025 156)",
+          "oklch(93% 0.018 156)",
+          "oklch(96% 0.010 156)"
+        ]
+      },
+      "state-success-fg": {
+        "role": "tertiary",
+        "displayName": "Botanical Sage Ink",
+        "canonical": "#1f543b",
+        "tonalRamp": [
+          "oklch(20% 0.048 156)",
+          "oklch(30% 0.066 156)",
+          "oklch(40% 0.077 156)",
+          "oklch(51% 0.074 156)",
+          "oklch(63% 0.062 156)",
+          "oklch(75% 0.044 156)",
+          "oklch(87% 0.024 156)",
+          "oklch(95% 0.012 156)"
+        ]
+      },
+      "state-success-border": {
+        "role": "tertiary",
+        "displayName": "Botanical Sage Border",
+        "canonical": "#a7cbb8",
+        "tonalRamp": [
+          "oklch(22% 0.034 156)",
+          "oklch(34% 0.046 156)",
+          "oklch(46% 0.052 156)",
+          "oklch(58% 0.052 156)",
+          "oklch(70% 0.048 156)",
+          "oklch(81% 0.044 156)",
+          "oklch(90% 0.026 156)",
+          "oklch(96% 0.012 156)"
+        ]
+      },
+      "state-danger-bg": {
+        "role": "tertiary",
+        "displayName": "Baked Brick Tint",
+        "canonical": "#f8e4e1",
+        "tonalRamp": [
+          "oklch(22% 0.045 25)",
+          "oklch(34% 0.062 25)",
+          "oklch(46% 0.068 25)",
+          "oklch(58% 0.062 25)",
+          "oklch(70% 0.050 25)",
+          "oklch(82% 0.035 25)",
+          "oklch(93% 0.022 25)",
+          "oklch(96% 0.012 25)"
+        ]
+      },
+      "state-danger-fg": {
+        "role": "tertiary",
+        "displayName": "Baked Brick Ink",
+        "canonical": "#8e241b",
+        "tonalRamp": [
+          "oklch(20% 0.075 26)",
+          "oklch(31% 0.110 26)",
+          "oklch(42% 0.138 26)",
+          "oklch(53% 0.132 26)",
+          "oklch(64% 0.106 26)",
+          "oklch(76% 0.072 26)",
+          "oklch(87% 0.040 26)",
+          "oklch(95% 0.018 26)"
+        ]
+      },
+      "state-danger-border": {
+        "role": "tertiary",
+        "displayName": "Baked Brick Border",
+        "canonical": "#dda098",
+        "tonalRamp": [
+          "oklch(22% 0.048 26)",
+          "oklch(34% 0.064 26)",
+          "oklch(46% 0.072 26)",
+          "oklch(58% 0.072 26)",
+          "oklch(70% 0.068 26)",
+          "oklch(76% 0.064 26)",
+          "oklch(88% 0.036 26)",
+          "oklch(95% 0.016 26)"
+        ]
+      },
+      "state-warning-bg": {
+        "role": "tertiary",
+        "displayName": "Warm Ochre Tint",
+        "canonical": "#f6ecda",
+        "tonalRamp": [
+          "oklch(23% 0.036 78)",
+          "oklch(35% 0.048 78)",
+          "oklch(47% 0.054 78)",
+          "oklch(59% 0.050 78)",
+          "oklch(71% 0.044 78)",
+          "oklch(83% 0.034 78)",
+          "oklch(94% 0.025 78)",
+          "oklch(97% 0.014 78)"
+        ]
+      },
+      "state-warning-fg": {
+        "role": "tertiary",
+        "displayName": "Warm Ochre Ink",
+        "canonical": "#724b12",
+        "tonalRamp": [
+          "oklch(21% 0.055 72)",
+          "oklch(32% 0.078 72)",
+          "oklch(43% 0.095 72)",
+          "oklch(54% 0.094 72)",
+          "oklch(66% 0.082 72)",
+          "oklch(78% 0.060 72)",
+          "oklch(88% 0.034 72)",
+          "oklch(95% 0.016 72)"
+        ]
+      },
+      "state-warning-border": {
+        "role": "tertiary",
+        "displayName": "Warm Ochre Border",
+        "canonical": "#d8bc89",
+        "tonalRamp": [
+          "oklch(22% 0.042 78)",
+          "oklch(34% 0.056 78)",
+          "oklch(46% 0.064 78)",
+          "oklch(58% 0.066 78)",
+          "oklch(70% 0.064 78)",
+          "oklch(80% 0.060 78)",
+          "oklch(89% 0.036 78)",
+          "oklch(96% 0.016 78)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Landing page hero heading and primary skin hydration verdict titles."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Authenticated view page titles and major landing section headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Brand wordmarks, ceramic panel headings, modal titles, and care-step subheadings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Primary Indonesian prose, care advice, checklists, and form input values (capped around 60ch)."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Form field labels, button copy, status pills, sidebar group headings, and metadata captions."
+      }
+    },
+    "shadows": [
+      {
+        "name": "ceramic",
+        "value": "0 2px 6px rgba(33, 27, 23, 0.06), 0 8px 20px rgba(33, 27, 23, 0.05)",
+        "purpose": "Soft resting elevation for ceramic panels sitting on the oat-linen ground."
+      },
+      {
+        "name": "tray",
+        "value": "0 12px 26px rgba(48, 28, 18, 0.18), 0 3px 8px rgba(48, 28, 18, 0.14)",
+        "purpose": "Weighted warm clay elevation for outer terracotta vanity trays and scope boxes."
+      },
+      {
+        "name": "tray-well",
+        "value": "inset 0 3px 8px rgba(56, 20, 9, 0.32), inset 0 1px 0 rgba(56, 20, 9, 0.24), inset 0 -1px 0 rgba(235, 165, 130, 0.16)",
+        "purpose": "Recessed inner cavity shadow inside terracotta vanity tray compartments."
+      },
+      {
+        "name": "dish",
+        "value": "0 4px 12px rgba(48, 22, 11, 0.22), 0 1px 2px rgba(48, 22, 11, 0.14)",
+        "purpose": "Grounded contact shadow for glazed ivory dishes seated inside recessed clay wells."
+      },
+      {
+        "name": "popover",
+        "value": "0 18px 42px rgba(33, 27, 23, 0.18), 0 4px 12px rgba(33, 27, 23, 0.08)",
+        "purpose": "Highest overlay elevation for confirmation dialogs and floating toast notifications."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Primary easing curve for tactile state changes, dish settle transitions, and mobile drawer slides."
+      },
+      {
+        "name": "dur-fast",
+        "value": "150ms",
+        "purpose": "Hover, focus, border, and button press micro-interactions."
+      },
+      {
+        "name": "dur-mid",
+        "value": "240ms",
+        "purpose": "Mobile navigation drawer translation and toast entrance/exit transitions."
+      },
+      {
+        "name": "dish-settle",
+        "value": "180ms cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Subtle 4px vertical fade-and-settle swap when switching serial history samples inside the ceramic dish."
+      }
+    ],
+    "breakpoints": [
+      { "name": "mobile-sm", "value": "600px" },
+      { "name": "mobile", "value": "720px" },
+      { "name": "drawer", "value": "960px" },
+      { "name": "tablet", "value": "1020px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Mineral Indigo primary action used for starting skin checks and submitting forms.",
+      "html": "<button type=\"button\" class=\"ds-btn-primary\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 7V5a1 1 0 0 1 1-1h2M17 4h2a1 1 0 0 1 1 1v2M20 17v2a1 1 0 0 1-1 1h-2M7 20H5a1 1 0 0 1-1-1v-2\" /><path d=\"M7 12h10\" /></svg><span>Mulai Cek Kulit</span></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 20px; border-radius: var(--radius-sm, 6px); border: 1.5px solid transparent; background: var(--indigo-primary, #234b72); color: var(--ceramic-ivory, #faf6ef); font-family: var(--font-ui, 'Onest', sans-serif); font-weight: 600; font-size: 0.9375rem; line-height: 1; box-shadow: 0 3px 10px rgba(21, 47, 73, 0.24); cursor: pointer; transition: background-color var(--dur-fast, 150ms) var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)), transform var(--dur-fast, 150ms) var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)); } .ds-btn-primary:hover { background: var(--indigo-hover, #1b3c5d); } .ds-btn-primary:active { transform: translateY(1px); } .ds-btn-primary:focus-visible { outline: 2.5px solid var(--indigo-primary, #234b72); outline-offset: 2px; }"
+    },
+    {
+      "name": "Ceramic Secondary Button",
+      "kind": "button",
+      "refersTo": "button-ceramic",
+      "description": "Glazed Ceramic Ivory secondary button with a full stone border for calm alternative actions.",
+      "html": "<button type=\"button\" class=\"ds-btn-ceramic\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 12a9 9 0 0 0-15.4-6.4L3 8\" /><path d=\"M3 3v5h5\" /><path d=\"M3 12a9 9 0 0 0 15.4 6.4L21 16\" /><path d=\"M21 21v-5h-5\" /></svg><span>Ganti Foto</span></button>",
+      "css": ".ds-btn-ceramic { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 20px; border-radius: var(--radius-sm, 6px); border: 1.5px solid var(--ceramic-border-strong, #c4b39c); background: var(--ceramic-ivory, #faf6ef); color: var(--ink-espresso, #211b17); font-family: var(--font-ui, 'Onest', sans-serif); font-weight: 600; font-size: 0.9375rem; line-height: 1; cursor: pointer; transition: background-color var(--dur-fast, 150ms) var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)), border-color var(--dur-fast, 150ms) var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)), transform var(--dur-fast, 150ms) var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)); } .ds-btn-ceramic:hover { background: #ffffff; border-color: var(--ink-umber, #51463e); } .ds-btn-ceramic:active { transform: translateY(1px); } .ds-btn-ceramic:focus-visible { outline: 2.5px solid var(--indigo-primary, #234b72); outline-offset: 2px; }"
+    },
+    {
+      "name": "Espresso Action Button",
+      "kind": "button",
+      "refersTo": "button-espresso",
+      "description": "High-contrast Espresso Ink button used for account registration and navigation entry points.",
+      "html": "<button type=\"button\" class=\"ds-btn-espresso\">Daftar Akun Baru</button>",
+      "css": ".ds-btn-espresso { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 20px; border-radius: var(--radius-sm, 6px); border: 1.5px solid transparent; background: var(--ink-espresso, #211b17); color: var(--ceramic-ivory, #faf6ef); font-family: var(--font-ui, 'Onest', sans-serif); font-weight: 600; font-size: 0.9375rem; line-height: 1; box-shadow: 0 3px 10px rgba(33, 27, 23, 0.18); cursor: pointer; transition: background-color var(--dur-fast, 150ms) var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)), transform var(--dur-fast, 150ms) var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)); } .ds-btn-espresso:hover { background: #362d27; } .ds-btn-espresso:active { transform: translateY(1px); } .ds-btn-espresso:focus-visible { outline: 2.5px solid var(--indigo-primary, #234b72); outline-offset: 2px; }"
+    },
+    {
+      "name": "Text Input Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Glazed ceramic text field with strong stone border, 44px touch height, and indigo focus ring.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field-label\" for=\"ds-email\">Alamat Email</label><input id=\"ds-email\" type=\"email\" class=\"ds-field-input\" placeholder=\"nama@contoh.id\" /><span class=\"ds-field-hint\">Gunakan email aktif untuk menyimpan riwayat pengecekan.</span></div>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 6px; font-family: var(--font-ui, 'Onest', sans-serif); max-width: 340px; } .ds-field-label { font-size: 0.875rem; font-weight: 600; color: var(--ink-espresso, #211b17); } .ds-field-input { width: 100%; min-height: 44px; padding: 10px 14px; background: var(--ceramic-ivory, #faf6ef); border: 1.5px solid var(--ceramic-border-strong, #c4b39c); border-radius: var(--radius-sm, 6px); color: var(--ink-espresso, #211b17); font-size: 0.9375rem; transition: border-color var(--dur-fast, 150ms) var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)), box-shadow var(--dur-fast, 150ms) var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)); } .ds-field-input::placeholder { color: var(--ink-muted, #6c5f55); } .ds-field-input:hover { border-color: var(--ink-umber, #51463e); } .ds-field-input:focus { outline: none; border-color: var(--indigo-primary, #234b72); background: #fffdf9; box-shadow: 0 0 0 3px rgba(35, 75, 114, 0.16); } .ds-field-hint { font-size: 0.8125rem; color: var(--ink-muted, #6c5f55); }"
+    },
+    {
+      "name": "Hydration Status Badges",
+      "kind": "chip",
+      "refersTo": "badge-hydrated",
+      "description": "Pill badges encoding binary Terhidrasi/Kering verdicts alongside simulation mode markers.",
+      "html": "<div class=\"ds-badge-row\"><span class=\"ds-badge ds-badge-hydrated\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 2.75C12 2.75 6 9.2 6 13.75a6 6 0 0 0 12 0C18 9.2 12 2.75 12 2.75Z\" /><path d=\"M9.5 14.2a2.6 2.6 0 0 0 2.5 2.6\" /></svg>Terhidrasi</span><span class=\"ds-badge ds-badge-dry\">Kering</span><span class=\"ds-badge ds-badge-demo\">Mode Simulasi</span></div>",
+      "css": ".ds-badge-row { display: inline-flex; flex-wrap: wrap; gap: 8px; font-family: var(--font-ui, 'Onest', sans-serif); } .ds-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: var(--radius-pill, 999px); font-size: 0.8125rem; font-weight: 600; line-height: 1.1; border: 1px solid transparent; } .ds-badge-hydrated { background: var(--state-hydrated-bg, #e6eef5); color: var(--state-hydrated-fg, #1b3c5d); border-color: var(--state-hydrated-border, #a5bfd6); } .ds-badge-dry { background: var(--state-dry-bg, #f6e4dc); color: var(--state-dry-fg, #83371b); border-color: var(--state-dry-border, #d9a087); } .ds-badge-demo { background: var(--state-warning-bg, #f6ecda); color: var(--state-warning-fg, #724b12); border-color: var(--state-warning-border, #d8bc89); }"
+    },
+    {
+      "name": "Sidebar Navigation Rail",
+      "kind": "nav",
+      "refersTo": "nav-item-active",
+      "description": "Linen Rail navigation items with an elevated Ceramic Ivory and Mineral Indigo active state.",
+      "html": "<nav class=\"ds-nav-rail\" aria-label=\"Menu aplikasi\"><a href=\"#\" class=\"ds-nav-item ds-nav-active\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 7V5a1 1 0 0 1 1-1h2M17 4h2a1 1 0 0 1 1 1v2M20 17v2a1 1 0 0 1-1 1h-2M7 20H5a1 1 0 0 1-1-1v-2\" /><path d=\"M7 12h10\" /></svg><span>Cek Kulit</span></a><a href=\"#\" class=\"ds-nav-item\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 12a9 9 0 1 0 3-6.7L3 8\" /><path d=\"M3 3v5h5\" /><path d=\"M12 7v5l3.5 2\" /></svg><span>Riwayat</span></a></nav>",
+      "css": ".ds-nav-rail { display: flex; flex-direction: column; gap: 4px; width: 240px; padding: 14px; background: var(--linen-rail, #e7decb); border: 1.5px solid var(--ceramic-border, #d7cab8); border-radius: var(--radius-md, 10px); font-family: var(--font-ui, 'Onest', sans-serif); } .ds-nav-item { display: flex; align-items: center; gap: 11px; min-height: 42px; padding: 0 12px; border-radius: var(--radius-sm, 6px); text-decoration: none; color: var(--ink-umber, #51463e); font-size: 0.9375rem; font-weight: 500; border: 1.5px solid transparent; transition: background-color var(--dur-fast, 150ms) var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)), color var(--dur-fast, 150ms) var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)); } .ds-nav-item:hover { background: rgba(250, 246, 239, 0.7); color: var(--ink-espresso, #211b17); } .ds-nav-active { background: var(--ceramic-ivory, #faf6ef); color: var(--indigo-primary, #234b72); font-weight: 600; border-color: var(--ceramic-border-strong, #c4b39c); box-shadow: 0 2px 6px rgba(33, 27, 23, 0.06); } .ds-nav-item:focus-visible { outline: 2.5px solid var(--indigo-primary, #234b72); outline-offset: 2px; }"
+    },
+    {
+      "name": "Ceramic Panel & Disclaimer Notice",
+      "kind": "card",
+      "refersTo": "ceramic-panel",
+      "description": "Full-bordered glazed ivory container paired with the mandatory non-medical disclaimer banner.",
+      "html": "<div class=\"ds-ceramic-panel\"><h3 class=\"ds-panel-title\">Panduan Pengambilan Foto</h3><p class=\"ds-panel-body\">Gunakan pencahayaan alami yang merata, pastikan area kulit terlihat jelas, dan hindari filter kamera.</p><div class=\"ds-notice\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9.25\" /><path d=\"M12 16v-4.2M12 8h.01\" /></svg><span>Hasil klasifikasi bersifat informatif dan bukan diagnosis medis.</span></div></div>",
+      "css": ".ds-ceramic-panel { background: var(--ceramic-ivory, #faf6ef); border: 1.5px solid var(--ceramic-border, #d7cab8); border-radius: var(--radius-md, 10px); padding: 24px; box-shadow: var(--shadow-ceramic, 0 2px 6px rgba(33, 27, 23, 0.06), 0 8px 20px rgba(33, 27, 23, 0.05)); font-family: var(--font-ui, 'Onest', sans-serif); max-width: 380px; } .ds-panel-title { margin: 0 0 8px; font-family: var(--font-display, 'Bricolage Grotesque', 'Onest', sans-serif); font-size: 1.2rem; font-weight: 700; letter-spacing: -0.025em; color: var(--ink-espresso, #211b17); } .ds-panel-body { margin: 0 0 16px; font-size: 0.9rem; line-height: 1.5; color: var(--ink-umber, #51463e); } .ds-notice { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border-radius: var(--radius-sm, 6px); border: 1.5px solid var(--ceramic-border-strong, #c4b39c); background: var(--ceramic-dish, #f6f0e6); color: var(--ink-umber, #51463e); font-size: 0.875rem; line-height: 1.48; } .ds-notice svg { flex-shrink: 0; margin-top: 2px; }"
+    },
+    {
+      "name": "Terracotta Vanity Tray & Ivory Result Dish",
+      "kind": "custom",
+      "refersTo": "vanity-tray",
+      "description": "Signature matte terracotta vessel with recessed clay well housing an elevated glazed ceramic result dish.",
+      "html": "<div class=\"ds-vanity-tray\"><div class=\"ds-vanity-well\"><article class=\"ds-ceramic-dish\"><span class=\"ds-dish-pill\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 2.75C12 2.75 6 9.2 6 13.75a6 6 0 0 0 12 0C18 9.2 12 2.75 12 2.75Z\" /><path d=\"M9.5 14.2a2.6 2.6 0 0 0 2.5 2.6\" /></svg>Hasil Analisis</span><p class=\"ds-dish-verdict\">Terhidrasi — 91%</p><div class=\"ds-dish-advice\"><strong>Saran Perawatan</strong><p>Gunakan pelembap ringan dan cukupi minum air putih.</p></div></article></div></div>",
+      "css": ".ds-vanity-tray { background: var(--clay-body, #a34d2d); border: 1.5px solid #8a3e22; border-radius: var(--radius-lg, 10px); padding: 12px; box-shadow: inset 0 1px 0 rgba(242, 180, 148, 0.3), var(--shadow-tray, 0 12px 26px rgba(48, 28, 18, 0.18), 0 3px 8px rgba(48, 28, 18, 0.14)); max-width: 360px; font-family: var(--font-ui, 'Onest', sans-serif); } .ds-vanity-well { background: var(--clay-recess, #904225); border: 1px solid rgba(72, 27, 11, 0.32); border-radius: var(--radius-sm, 6px); padding: 16px; box-shadow: var(--shadow-tray-well, inset 0 3px 8px rgba(56, 20, 9, 0.32), inset 0 1px 0 rgba(56, 20, 9, 0.24), inset 0 -1px 0 rgba(235, 165, 130, 0.16)); } .ds-ceramic-dish { background: var(--ceramic-ivory, #faf6ef); border-radius: var(--radius-sm, 6px); padding: 20px; box-shadow: var(--shadow-dish, 0 4px 12px rgba(48, 22, 11, 0.22), 0 1px 2px rgba(48, 22, 11, 0.14)); display: flex; flex-direction: column; gap: 10px; } .ds-dish-pill { align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: var(--radius-pill, 999px); background: var(--indigo-primary, #234b72); color: var(--ceramic-ivory, #faf6ef); font-size: 0.8125rem; font-weight: 600; } .ds-dish-verdict { margin: 0; font-family: var(--font-display, 'Bricolage Grotesque', 'Onest', sans-serif); font-size: 1.65rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; color: var(--ink-espresso, #211b17); font-variant-numeric: tabular-nums; } .ds-dish-advice { padding-top: 10px; border-top: 1px solid var(--ceramic-border, #d7cab8); font-size: 0.875rem; color: var(--ink-umber, #51463e); } .ds-dish-advice strong { display: block; color: var(--ink-espresso, #211b17); margin-bottom: 4px; } .ds-dish-advice p { margin: 0; line-height: 1.48; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Meja Rias Linen & Lempung",
+    "overview": "HydraVision translates at-home skin hydration checks into the tactile calm of a morning dressing table. Rather than borrowing the sterile white-and-cyan language of hospital diagnostics or glossy SaaS skincare templates, every surface belongs to a physical material family: an unbleached oat-linen ground with subtle organic fiber grain, matte terracotta vanity trays with recessed compartments, glazed ceramic ivory dishes, and deep espresso ink.\n\nThe system balances warmth with crisp operational clarity. Users check skin hydration from home lighting on phones and laptops, so hierarchy relies on decisive scale jumps, honest plain-language guidance, tabular confidence numerals, and clear binary coding—Mineral Indigo for primary actions and Terhidrasi results, Matte Terracotta for the tray vessel and Kering results. Interactive surfaces stay calm and flat until physical nesting or user state warrants elevation.",
+    "keyCharacteristics": [
+      "Tactile domestic materials—oat-linen ground with subtle SVG fiber noise, matte terracotta clay vessels, and glazed ceramic ivory dishes—replacing clinical white templates.",
+      "Strict binary material semantics: Mineral Indigo anchors primary actions and Terhidrasi status, while Matte Terracotta anchors the vanity tray and Kering status.",
+      "Crisp architectural ceramic geometry (4px, 6px, and 10px radii) paired with full 1.5px perimeter borders rather than one-sided accent stripes.",
+      "Self-hosted Bricolage Grotesque display headings and Onest UI copy with tabular-nums on every confidence percentage and serial history score.",
+      "Transparent, non-medical framing embedded natively into components (photo-quality checklists, simulation badges, and framed disclaimer notices)."
+    ],
+    "rules": [
+      {
+        "name": "The Binary Material Rule",
+        "body": "Reserve Mineral Indigo (#234b72) for primary actions and Terhidrasi states, and Matte Terracotta (#a34d2d) for the vanity tray chassis and Kering states. Never mix the two into gradients or swap their semantic meaning across screens.",
+        "section": "colors"
+      },
+      {
+        "name": "The Unbleached Ground Rule",
+        "body": "Anchor canvases on Oat Linen (#ede5d8) and cards on Glazed Ceramic Ivory (#faf6ef) rather than cold pure white (#ffffff). Keep ambient contrast warm and comfortable under bathroom or bedroom lighting.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Confidence Rule",
+        "body": "Apply font-variant-numeric: tabular-nums (.tabular) to every confidence percentage, serial date chip, workflow step index, and dashboard count so digits never jitter when switching history samples.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence-Case Honesty Rule",
+        "body": "Set all headings, buttons, badges, and navigation groups in natural Indonesian sentence or title case. Never introduce uppercase kickers, all-caps eyebrows, or wide-tracked micro-labels.",
+        "section": "typography"
+      },
+      {
+        "name": "The Physical Vessel Rule",
+        "body": "Match shadow direction and weight to physical nesting: outer terracotta trays cast grounded clay shadows (--shadow-tray), inner compartments recede via inset depth (--shadow-tray-well), and ivory dishes rest inside wells with tighter contact shadows (--shadow-dish).",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep Mineral Indigo (#234b72) and Matte Terracotta (#a34d2d) semantically distinct—Indigo for primary actions and Terhidrasi, Terracotta for vanity trays and Kering.",
+      "Do frame every ceramic panel, disclaimer notice, and status dish with full four-sided borders (1px–1.5px) rather than one-sided accent bars.",
+      "Do apply tabular-nums (.tabular) to all confidence percentages, serial dates, and metric counters.",
+      "Do pair every classification result with a visible non-medical disclaimer notice and clearly label synthetic/demo data with the Warm Ochre Mode Simulasi badge.",
+      "Do respect physical shadow nesting: --shadow-tray on outer clay trays, --shadow-tray-well inset inside cavities, and --shadow-dish on ivory cards resting inside wells.",
+      "Do maintain at least 44px interactive height on primary buttons and form inputs for comfortable one-handed mobile use."
+    ],
+    "donts": [
+      "Don't introduce cold clinical cyan, pure-white (#ffffff) page backgrounds, neon glows, or gradient fills across buttons and cards.",
+      "Don't use all-caps kickers, over-tracked eyebrow labels, or one-sided border-left callout stripes.",
+      "Don't replace custom HvIcon stroke SVGs (1.85px stroke) with emoji glyphs or mismatched icon packs.",
+      "Don't invent new radius steps outside the stoneware scale (4px, 6px, 10px, 999px) when building new components.",
+      "Don't omit confirmation dialogs (ConfirmDialog) on destructive actions such as deleting history records or removing user accounts."
+    ]
+  }
+}

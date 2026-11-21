@@ -1,0 +1,16 @@
+# Dependencies & build outputs
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Local editor & OS files
+.DS_Store
+Thumbs.db
+*.local
+
+# Impeccable working caches (keep config.json, design.json, and surfaces/)
+.impeccable/mocks/
+.impeccable/review/
+.impeccable/reference/
+.impeccable/build/
+.impeccable/config.local.json
