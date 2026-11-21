@@ -101,6 +101,34 @@ export async function registerUser(payload: {
   }
 }
 
+const POST_LOGIN_DEST_KEY = 'hv_post_login_dest'
+const ALLOWED_POST_LOGIN_PREFIXES = ['/dashboard', '/classify', '/history', '/profile', '/admin']
+
+function isAllowedInternalDestination(path: string): boolean {
+  if (!path.startsWith('/') || path.startsWith('//')) return false
+  return ALLOWED_POST_LOGIN_PREFIXES.some(
+    (prefix) => path === prefix || path.startsWith(`${prefix}/`),
+  )
+}
+
+export function setPostLoginDestination(path: string) {
+  const cleanPath = path.split('?')[0]?.split('#')[0] ?? ''
+  if (!isAllowedInternalDestination(cleanPath)) return
+  try {
+    sessionStorage.setItem(POST_LOGIN_DEST_KEY, cleanPath)
+  } catch {}
+}
+
+export function consumePostLoginDestination(): string | null {
+  try {
+    const dest = sessionStorage.getItem(POST_LOGIN_DEST_KEY)
+    sessionStorage.removeItem(POST_LOGIN_DEST_KEY)
+    return dest && isAllowedInternalDestination(dest) ? dest : null
+  } catch {
+    return null
+  }
+}
+
 export async function logoutUser() {
   try {
     await api.post('/auth/logout')
@@ -108,6 +136,9 @@ export async function logoutUser() {
   state.user = null
   state.token = null
   localStorage.removeItem('hv_token')
+  try {
+    sessionStorage.removeItem(POST_LOGIN_DEST_KEY)
+  } catch {}
   pushToast('Anda telah keluar dari sesi HydraVision.', 'info')
 }
 

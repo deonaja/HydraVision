@@ -191,7 +191,7 @@ button {
 }
 
 .btn-ceramic:hover:not(:disabled) {
-  background: #ffffff;
+  background: #fdfaf4;
   border-color: var(--ink-umber);
   color: var(--ink-espresso);
 }
@@ -367,6 +367,12 @@ button {
 
 .badge-inactive {
   background: var(--linen-deep);
+  color: var(--ink-umber);
+  border-color: var(--ceramic-border-strong);
+}
+
+.badge-neutral {
+  background: var(--ceramic-ivory);
   color: var(--ink-umber);
   border-color: var(--ceramic-border-strong);
 }

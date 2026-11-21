@@ -274,9 +274,7 @@ function resetForNewCheck() {
             @drop.prevent="onDrop"
           >
             <div class="drop-inner" @click="openPicker">
-              <span class="drop-icon" aria-hidden="true">
-                <HvIcon name="upload" :size="30" />
-              </span>
+              <HvIcon name="upload" :size="28" class="drop-glyph" />
               <h2>Pilih atau Ambil Foto Kulit</h2>
               <p>Tarik foto ke area ini, unggah berkas (JPG/PNG maks 5 MB), atau gunakan kamera langsung.</p>
               <div class="drop-actions-row">
@@ -434,12 +432,11 @@ function resetForNewCheck() {
           </p>
           <ul class="guide-list">
             <li v-for="item in PHOTO_GUIDELINES" :key="item.id">
-              <span class="guide-icon" aria-hidden="true">
-                <HvIcon
-                  :name="item.id === 'light' ? 'sun' : item.id === 'clear' ? 'focus' : 'ban'"
-                  :size="18"
-                />
-              </span>
+              <HvIcon
+                :name="item.id === 'light' ? 'sun' : item.id === 'clear' ? 'focus' : 'ban'"
+                :size="18"
+                class="guide-glyph"
+              />
               <div>
                 <strong>{{ item.title }}</strong>
                 <p>{{ item.detail }}</p>
@@ -455,7 +452,6 @@ function resetForNewCheck() {
       <section v-else-if="stage === 'loading'" class="loading-stage ceramic-panel" aria-live="polite">
         <div class="loading-preview">
           <img v-if="previewDataUrl" :src="previewDataUrl" alt="Foto sedang diproses" />
-          <div class="scan-beam" aria-hidden="true"></div>
         </div>
         <div class="loading-copy">
           <h2>Sedang Mengklasifikasikan Kondisi Kulit</h2>
@@ -623,13 +619,8 @@ function resetForNewCheck() {
   background: rgba(255, 250, 244, 0.05);
 }
 
-.drop-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: rgba(250, 246, 239, 0.14);
-  display: grid;
-  place-items: center;
+.drop-glyph {
+  color: var(--ink-on-clay);
 }
 
 .drop-inner h2 {
@@ -698,8 +689,8 @@ function resetForNewCheck() {
   flex: 1;
   padding: 7px 12px;
   border-radius: var(--radius-xs);
-  border: 1px solid var(--ceramic-border);
-  background: #fff;
+  border: 1.5px solid var(--ceramic-border-strong);
+  background: var(--ceramic-ivory);
   font-size: 0.875rem;
   color: var(--ink-espresso);
   font-family: inherit;
@@ -718,11 +709,11 @@ function resetForNewCheck() {
   aspect-ratio: 4 / 3;
   border-radius: var(--radius-sm);
   overflow: hidden;
-  background: #111;
+  background: var(--ink-espresso);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--clay-body);
+  border: 1.5px solid var(--clay-body);
 }
 
 .camera-video {
@@ -744,7 +735,7 @@ function resetForNewCheck() {
   position: absolute;
   width: 28px;
   height: 28px;
-  border: 2.5px solid rgba(255, 255, 255, 0.85);
+  border: 2px solid rgba(250, 246, 239, 0.86);
 }
 
 .target-tl {
@@ -776,26 +767,25 @@ function resetForNewCheck() {
 }
 
 .target-hint {
-  font-size: 0.8rem;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.65);
-  padding: 4px 12px;
-  border-radius: 999px;
+  font-size: 0.875rem;
+  color: var(--ceramic-ivory);
+  background: rgba(33, 27, 23, 0.72);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
   margin-bottom: 8px;
-  letter-spacing: 0.02em;
 }
 
 .camera-loader {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(33, 27, 23, 0.76);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  color: #fff;
-  font-size: 0.9rem;
+  color: var(--ceramic-ivory);
+  font-size: 0.875rem;
 }
 
 .spin-icon {
@@ -947,15 +937,10 @@ function resetForNewCheck() {
   gap: 12px;
 }
 
-.guide-icon {
+.guide-glyph {
   flex-shrink: 0;
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
-  background: var(--indigo-tint);
+  margin-top: 2px;
   color: var(--indigo-primary);
-  display: grid;
-  place-items: center;
 }
 
 .guide-list strong {
@@ -1005,26 +990,6 @@ function resetForNewCheck() {
   height: 100%;
   object-fit: cover;
   display: block;
-}
-
-.scan-beam {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--ceramic-ivory);
-  border-bottom: 1px solid var(--indigo-primary);
-  box-shadow: 0 3px 8px rgba(33, 27, 23, 0.28);
-  animation: scanSweep 1.3s ease-in-out infinite alternate;
-}
-
-@keyframes scanSweep {
-  from {
-    top: 10%;
-  }
-  to {
-    top: 88%;
-  }
 }
 
 .loading-copy {

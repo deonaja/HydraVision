@@ -7,7 +7,7 @@ import {
   stagedLandingUpload,
   validateSkinImageFile,
 } from '@/services/mockStore'
-import { isAuthenticated, isAdmin } from '@/services/authStore'
+import { isAuthenticated, isAdmin, setPostLoginDestination } from '@/services/authStore'
 import HvIcon from '@/components/HvIcon.vue'
 
 interface SampleStripItem {
@@ -74,7 +74,8 @@ function stageFileAndContinue(file: File) {
     if (isAuthenticated.value) {
       router.push('/classify')
     } else {
-      router.push({ path: '/login', query: { redirect: '/classify' } })
+      setPostLoginDestination('/classify')
+      router.push('/login')
     }
   }
   reader.readAsDataURL(file)
@@ -97,7 +98,8 @@ function goStartCheck() {
   if (isAuthenticated.value) {
     router.push('/classify')
   } else {
-    router.push({ path: '/login', query: { redirect: '/classify' } })
+    setPostLoginDestination('/classify')
+    router.push('/login')
   }
 }
 </script>
@@ -160,9 +162,7 @@ function goStartCheck() {
                 @change="onFileChange"
               />
               <div class="dropzone-frame" @click="triggerFilePicker">
-                <span class="dropzone-icon" aria-hidden="true">
-                  <HvIcon name="upload" :size="30" />
-                </span>
+                <HvIcon name="upload" :size="28" class="dropzone-glyph" />
                 <p class="dropzone-title">
                   <strong>Unggah Foto Kulit</strong> · JPG/PNG maks 5 MB
                 </p>
@@ -530,7 +530,7 @@ function goStartCheck() {
 .dropzone-frame {
   width: 100%;
   border: 1.5px dashed rgba(250, 246, 239, 0.56);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   padding: 24px 20px;
   display: flex;
   flex-direction: column;
@@ -550,13 +550,7 @@ function goStartCheck() {
   background: rgba(255, 248, 240, 0.08);
 }
 
-.dropzone-icon {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: rgba(250, 246, 239, 0.14);
-  display: grid;
-  place-items: center;
+.dropzone-glyph {
   color: var(--ceramic-ivory);
 }
 
@@ -566,7 +560,7 @@ function goStartCheck() {
 }
 
 .dropzone-title strong {
-  color: #ffffff;
+  color: var(--ink-on-clay);
   font-weight: 600;
 }
 

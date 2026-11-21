@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { registerUser, authLoading } from '@/services/authStore'
+import { registerUser, authLoading, consumePostLoginDestination } from '@/services/authStore'
 import HvIcon from '@/components/HvIcon.vue'
 
 const router = useRouter()
@@ -27,6 +27,11 @@ async function submitRegister() {
   })
   if (!result.ok) {
     errorMessage.value = result.error
+    return
+  }
+  const nextDest = consumePostLoginDestination()
+  if (nextDest && !nextDest.startsWith('/admin')) {
+    router.push(nextDest)
     return
   }
   router.push('/dashboard')

@@ -69,7 +69,7 @@ async function executeConfirmedAction() {
             Lihat detail akun pengguna, nonaktifkan sementara, atau hapus akun dengan konfirmasi.
           </p>
         </div>
-        <span class="badge badge-hydrated tabular">{{ userAccounts.length }} akun tampil</span>
+        <span class="badge badge-neutral tabular">{{ userAccounts.length }} akun tampil</span>
       </header>
 
       <section class="filter-strip ceramic-panel">
@@ -363,7 +363,7 @@ async function executeConfirmedAction() {
 }
 
 .data-table tbody tr.is-selected {
-  background: var(--indigo-tint);
+  background: var(--linen-soft);
 }
 
 .user-cell {
@@ -381,7 +381,8 @@ async function executeConfirmedAction() {
   color: var(--ink-muted);
 }
 
-.num-col {
+.data-table th.num-col,
+.data-table td.num-col {
   text-align: right;
 }
 
@@ -391,7 +392,8 @@ async function executeConfirmedAction() {
   font-size: 0.84rem;
 }
 
-.action-col {
+.data-table th.action-col,
+.data-table td.action-col {
   text-align: right;
 }
 

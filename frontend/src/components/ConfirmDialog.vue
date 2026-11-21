@@ -48,11 +48,16 @@ function onBackdropClick(e: MouseEvent) {
   >
     <div class="hv-dialog-card">
       <div class="hv-dialog-head">
-        <span class="hv-dialog-icon" :class="tone === 'danger' ? 'is-danger' : 'is-clay'">
-          <HvIcon name="alert" :size="20" />
-        </span>
         <div class="hv-dialog-copy">
-          <h3>{{ title }}</h3>
+          <h3 class="hv-dialog-title">
+            <HvIcon
+              name="alert"
+              :size="19"
+              class="hv-dialog-glyph"
+              :class="tone === 'danger' ? 'is-danger' : 'is-clay'"
+            />
+            <span>{{ title }}</span>
+          </h3>
           <p>{{ message }}</p>
         </div>
       </div>
@@ -105,39 +110,32 @@ function onBackdropClick(e: MouseEvent) {
 .hv-dialog-head {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
 }
 
-.hv-dialog-icon {
+.hv-dialog-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+
+.hv-dialog-glyph {
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
 }
 
-.hv-dialog-icon.is-danger {
-  background: var(--state-danger-bg);
+.hv-dialog-glyph.is-danger {
   color: var(--state-danger-fg);
-  border: 1px solid var(--state-danger-border);
 }
 
-.hv-dialog-icon.is-clay {
-  background: var(--state-dry-bg);
-  color: var(--state-dry-fg);
-  border: 1px solid var(--state-dry-border);
-}
-
-.hv-dialog-copy h3 {
-  font-size: 1.125rem;
-  margin-bottom: 6px;
+.hv-dialog-glyph.is-clay {
+  color: var(--clay-body);
 }
 
 .hv-dialog-copy p {
-  font-size: 0.9375rem;
+  font-size: 1rem;
   color: var(--ink-umber);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .hv-dialog-actions {

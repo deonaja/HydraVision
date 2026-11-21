@@ -173,7 +173,7 @@ function handleLogout() {
 .brand-mark {
   width: 32px;
   height: 32px;
-  border-radius: 9px;
+  border-radius: var(--radius-sm);
   background: var(--clay-body);
   color: var(--ceramic-ivory);
   display: grid;
@@ -192,7 +192,7 @@ function handleLogout() {
   border: none;
   background: transparent;
   padding: 6px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   color: var(--ink-espresso);
 }
 

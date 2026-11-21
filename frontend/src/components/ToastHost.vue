@@ -16,6 +16,7 @@ import HvIcon from './HvIcon.vue'
         <HvIcon
           :name="item.tone === 'success' ? 'check-circle' : item.tone === 'error' ? 'alert' : 'info'"
           :size="18"
+          class="toast-icon"
         />
         <span class="toast-text">{{ item.message }}</span>
         <button
@@ -57,15 +58,26 @@ import HvIcon from './HvIcon.vue'
   font-weight: 500;
 }
 
+.toast-icon {
+  flex-shrink: 0;
+  color: var(--indigo-primary);
+}
+
 .toast-success {
-  background: var(--state-success-bg);
-  border-color: var(--state-success-border);
-  color: var(--state-success-fg);
+  border-color: var(--indigo-border);
+}
+
+.toast-success .toast-icon {
+  color: var(--indigo-primary);
 }
 
 .toast-error {
   background: var(--state-danger-bg);
   border-color: var(--state-danger-border);
+  color: var(--state-danger-fg);
+}
+
+.toast-error .toast-icon {
   color: var(--state-danger-fg);
 }
 
@@ -77,16 +89,22 @@ import HvIcon from './HvIcon.vue'
   border: none;
   background: transparent;
   padding: 4px;
-  border-radius: 6px;
+  border-radius: var(--radius-xs);
   display: grid;
   place-items: center;
-  color: inherit;
-  opacity: 0.75;
+  color: var(--ink-muted);
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
 }
 
 .toast-close:hover {
-  opacity: 1;
+  color: var(--ink-espresso);
   background: rgba(33, 27, 23, 0.08);
+}
+
+.toast-error .toast-close {
+  color: var(--state-danger-fg);
 }
 
 .toast-enter-active,

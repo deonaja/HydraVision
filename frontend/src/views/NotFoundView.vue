@@ -164,9 +164,7 @@ onBeforeUnmount(() => {
       <section class="vanity-tray nf-tray" aria-labelledby="nf-heading-auth">
         <div class="vanity-tray-well nf-empty-well">
           <div class="nf-empty-slot">
-            <div class="nf-medallion" aria-hidden="true">
-              <HvIcon name="compass" :size="24" />
-            </div>
+            <HvIcon name="compass" :size="26" class="nf-compass" />
             <p class="nf-code tabular" aria-hidden="true">404</p>
             <p class="nf-slot-note">Kompartemen alamat ini kosong.</p>
           </div>
@@ -220,9 +218,7 @@ onBeforeUnmount(() => {
         <ul class="nf-dir-list">
           <li v-for="item in quickLinks" :key="item.to">
             <RouterLink :to="item.to" class="nf-dir-link">
-              <span class="nf-dir-icon" aria-hidden="true">
-                <HvIcon :name="item.icon" :size="18" />
-              </span>
+              <HvIcon :name="item.icon" :size="19" class="nf-dir-glyph" />
               <span class="nf-dir-copy">
                 <strong>{{ item.label }}</strong>
                 <span>{{ item.detail }}</span>
@@ -254,9 +250,7 @@ onBeforeUnmount(() => {
         <section class="vanity-tray nf-tray" aria-labelledby="nf-heading-guest">
           <div class="vanity-tray-well nf-empty-well">
             <div class="nf-empty-slot">
-              <div class="nf-medallion" aria-hidden="true">
-                <HvIcon name="compass" :size="24" />
-              </div>
+              <HvIcon name="compass" :size="26" class="nf-compass" />
               <p class="nf-code tabular" aria-hidden="true">404</p>
               <p class="nf-slot-note">Kompartemen alamat ini kosong.</p>
             </div>
@@ -441,15 +435,8 @@ onBeforeUnmount(() => {
   gap: 12px;
 }
 
-.nf-medallion {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: rgba(56, 20, 9, 0.28);
-  border: 1.5px solid rgba(250, 246, 239, 0.34);
-  color: var(--ink-on-clay);
-  display: grid;
-  place-items: center;
+.nf-compass {
+  color: rgba(251, 246, 240, 0.86);
 }
 
 .nf-code {
@@ -595,16 +582,9 @@ onBeforeUnmount(() => {
   color: var(--ink-espresso);
 }
 
-.nf-dir-icon {
-  width: 38px;
-  height: 38px;
+.nf-dir-glyph {
   flex-shrink: 0;
-  border-radius: var(--radius-sm);
-  background: var(--indigo-tint);
-  border: 1px solid var(--state-hydrated-border);
   color: var(--indigo-primary);
-  display: grid;
-  place-items: center;
 }
 
 .nf-dir-copy {

@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import { loginUser, authLoading } from '@/services/authStore'
+import { useRouter } from 'vue-router'
+import { loginUser, authLoading, consumePostLoginDestination } from '@/services/authStore'
 import HvIcon from '@/components/HvIcon.vue'
 
 const router = useRouter()
-const route = useRoute()
 
 const email = ref('')
 const password = ref('')
@@ -30,12 +29,12 @@ async function submitLogin() {
     errorMessage.value = result.error
     return
   }
-  const redirect = typeof route.query.redirect === 'string' ? route.query.redirect : null
-  if (redirect && redirect.startsWith('/')) {
-    if (redirect.startsWith('/admin') && result.user.role !== 'admin') {
+  const nextDest = consumePostLoginDestination()
+  if (nextDest) {
+    if (nextDest.startsWith('/admin') && result.user.role !== 'admin') {
       router.push('/dashboard')
     } else {
-      router.push(redirect)
+      router.push(nextDest)
     }
     return
   }
@@ -71,7 +70,7 @@ async function submitLogin() {
               </p>
 
               <div class="demo-section">
-                <p class="demo-title">Akun Demo Frontend (Simulasi)</p>
+                <p class="demo-title">Akun Pengujian Cepat</p>
                 <div class="demo-buttons">
                   <button type="button" class="btn btn-ceramic btn-sm" @click="fillDemo('user')">
                     Isi Demo User

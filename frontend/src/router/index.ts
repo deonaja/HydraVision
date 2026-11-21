@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { isAuthenticated, isAdmin } from '@/services/authStore'
+import { isAuthenticated, isAdmin, setPostLoginDestination } from '@/services/authStore'
 
 import LandingView from '@/views/LandingView.vue'
 import LoginView from '@/views/LoginView.vue'
@@ -92,7 +92,8 @@ const router = createRouter({
 /* FR-05: Proteksi halaman terautentikasi dan pembatasan role Admin */
 router.beforeEach((to) => {
   if (to.meta.requiresAuth && !isAuthenticated.value) {
-    return { name: 'login', query: { redirect: to.fullPath } }
+    setPostLoginDestination(to.path)
+    return { name: 'login' }
   }
   if (to.meta.requiresAdmin && !isAdmin.value) {
     return { name: 'dashboard' }

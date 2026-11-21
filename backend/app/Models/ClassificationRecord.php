@@ -34,7 +34,7 @@ class ClassificationRecord extends Model
             return $this->image_path;
         }
 
-        return asset('storage/' . $this->image_path);
+        return '/storage/' . ltrim($this->image_path, '/');
     }
 
     public function user(): BelongsTo
