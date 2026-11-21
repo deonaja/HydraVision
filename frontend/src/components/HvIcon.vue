@@ -31,6 +31,8 @@ defineProps<{
     | 'home'
     | 'scan'
     | 'camera'
+    | 'compass'
+    | 'copy'
   size?: number
 }>()
 </script>
@@ -173,6 +175,14 @@ defineProps<{
     <template v-else-if="name === 'camera'">
       <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
       <circle cx="12" cy="13" r="3" />
+    </template>
+    <template v-else-if="name === 'compass'">
+      <circle cx="12" cy="12" r="9.25" />
+      <polygon points="15.8 8.2 13.7 13.7 8.2 15.8 10.3 10.3 15.8 8.2" />
+    </template>
+    <template v-else-if="name === 'copy'">
+      <rect x="9" y="9" width="11" height="11" rx="2" />
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
     </template>
   </svg>
 </template>

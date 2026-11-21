@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { requestPasswordReset, completePasswordReset } from '@/services/authStore'
+import {
+  requestPasswordReset,
+  completePasswordReset,
+  hasAutoResetToken,
+} from '@/services/authStore'
 import HvIcon from '@/components/HvIcon.vue'
 
 const router = useRouter()
@@ -10,6 +14,7 @@ type Step = 'request' | 'sent' | 'reset'
 const step = ref<Step>('request')
 const email = ref('')
 const sentEmail = ref('')
+const resetToken = ref('')
 const newPassword = ref('')
 const confirmPassword = ref('')
 const errorMessage = ref<string | null>(null)
@@ -31,7 +36,7 @@ async function handleResetPassword() {
     errorMessage.value = 'Konfirmasi password baru tidak sama.'
     return
   }
-  const result = await completePasswordReset(newPassword.value)
+  const result = await completePasswordReset(newPassword.value, resetToken.value)
   if (!result.ok) {
     errorMessage.value = result.error
     return
@@ -97,14 +102,18 @@ async function handleResetPassword() {
           <div class="notice notice-info">
             <HvIcon name="mail" :size="18" />
             <div>
-              <strong>Simulasi Email Frontend:</strong> Karena backend email belum aktif, klik
-              tombol di bawah untuk langsung membuka tautan reset password.
+              <strong>Token Reset Aktif:</strong>
+              {{
+                hasAutoResetToken
+                  ? 'Backend telah menerbitkan token reset untuk sesi lokal ini. Klik tombol di bawah untuk langsung membuat password baru.'
+                  : 'Periksa email Anda untuk mendapatkan token reset, lalu lanjutkan ke halaman pengaturan password baru.'
+              }}
             </div>
           </div>
 
           <div class="sent-actions">
             <button type="button" class="btn btn-primary btn-lg" @click="step = 'reset'">
-              Buka Tautan Reset Simulasi
+              Lanjut Atur Password Baru
             </button>
             <button type="button" class="btn btn-ceramic" @click="step = 'request'">
               Ganti Email
@@ -125,6 +134,18 @@ async function handleResetPassword() {
           </div>
 
           <form class="auth-form" novalidate @submit.prevent="handleResetPassword">
+            <div v-if="!hasAutoResetToken" class="field">
+              <label for="reset-token" class="field-label">Token Reset</label>
+              <input
+                id="reset-token"
+                v-model="resetToken"
+                type="text"
+                class="field-input"
+                placeholder="Masukkan token reset dari email"
+                required
+              />
+            </div>
+
             <div class="field">
               <label for="new-pw" class="field-label">Password Baru</label>
               <input

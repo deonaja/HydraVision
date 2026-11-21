@@ -22,9 +22,10 @@ class AuthController extends Controller
         ]);
 
         $user = User::create([
-            'name'     => $validated['name'],
-            'email'    => $validated['email'],
-            'password' => Hash::make($validated['password']),
+            'name'          => $validated['name'],
+            'email'         => $validated['email'],
+            'password'      => Hash::make($validated['password']),
+            'last_login_at' => now(),
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
@@ -102,15 +103,25 @@ class AuthController extends Controller
 
     public function forgotPassword(Request $request): JsonResponse
     {
-        $request->validate(['email' => 'required|email']);
+        $validated = $request->validate(['email' => 'required|email']);
 
-        $status = Password::sendResetLink($request->only('email'));
+        $user = User::where('email', $validated['email'])->first();
 
-        if ($status === Password::RESET_LINK_SENT) {
-            return response()->json(['message' => 'Link reset password telah dikirim ke email Anda.']);
+        if (! $user) {
+            return response()->json(['message' => 'Email tidak ditemukan.'], 422);
         }
 
-        return response()->json(['message' => 'Email tidak ditemukan.'], 422);
+        $token = Password::broker()->createToken($user);
+
+        $response = [
+            'message' => 'Token reset password telah dibuat untuk email Anda.',
+        ];
+
+        if (app()->environment(['local', 'testing'])) {
+            $response['reset_token'] = $token;
+        }
+
+        return response()->json($response);
     }
 
     public function resetPassword(Request $request): JsonResponse

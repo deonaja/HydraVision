@@ -23,6 +23,7 @@ async function submitRegister() {
     name: name.value,
     email: email.value,
     password: password.value,
+    passwordConfirmation: confirmPassword.value,
   })
   if (!result.ok) {
     errorMessage.value = result.error

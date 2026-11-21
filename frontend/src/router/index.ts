@@ -13,6 +13,7 @@ import ProfileView from '@/views/ProfileView.vue'
 import AdminDashboardView from '@/views/AdminDashboardView.vue'
 import AdminUsersView from '@/views/AdminUsersView.vue'
 import AdminRecommendationsView from '@/views/AdminRecommendationsView.vue'
+import NotFoundView from '@/views/NotFoundView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -80,7 +81,11 @@ const router = createRouter({
       component: AdminRecommendationsView,
       meta: { requiresAuth: true, requiresAdmin: true },
     },
-    { path: '/:pathMatch(.*)*', redirect: '/' },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: NotFoundView,
+    },
   ],
 })
 
