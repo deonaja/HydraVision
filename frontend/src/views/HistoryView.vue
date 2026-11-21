@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import {
-  myHistory,
-  deleteHistoryRecord,
-  formatDateFull,
-  formatDateShort,
-} from '@/services/mockStore'
+import { ref, computed, onMounted } from 'vue'
+import { formatDateFull, formatDateShort } from '@/services/mockStore'
+import { myHistory, loadMyHistory, deleteHistoryRecord } from '@/services/dataStore'
 import type { HistoryQuery } from '@/types/hydravision'
 import AppShell from '@/components/AppShell.vue'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
@@ -19,6 +15,8 @@ const query = ref<HistoryQuery>({
 })
 
 const deleteTargetId = ref<string | null>(null)
+
+onMounted(loadMyHistory)
 
 const filteredHistory = computed(() => {
   let list = [...myHistory.value]
@@ -71,11 +69,10 @@ function resetFilters() {
   }
 }
 
-function confirmDelete() {
-  if (deleteTargetId.value) {
-    deleteHistoryRecord(deleteTargetId.value)
-  }
+async function confirmDelete() {
+  const id = deleteTargetId.value
   deleteTargetId.value = null
+  if (id) await deleteHistoryRecord(id)
 }
 </script>
 

@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { formatDateFull } from '@/services/mockStore'
 import {
   storeState,
+  loadRecommendations,
   createRecommendation,
   updateRecommendation,
   deleteRecommendation,
-  formatDateFull,
-} from '@/services/mockStore'
+} from '@/services/dataStore'
 import type { CareRecommendation, SkinLabel } from '@/types/hydravision'
 import AppShell from '@/components/AppShell.vue'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
@@ -47,10 +48,10 @@ function cancelEdit() {
   formError.value = null
 }
 
-function submitForm() {
+async function submitForm() {
   formError.value = null
   if (editingId.value) {
-    const res = updateRecommendation(editingId.value, {
+    const res = await updateRecommendation(editingId.value, {
       skinLabel: formSkinLabel.value,
       title: formTitle.value,
       body: formBody.value,
@@ -62,7 +63,7 @@ function submitForm() {
     activeClass.value = formSkinLabel.value
     cancelEdit()
   } else {
-    const res = createRecommendation({
+    const res = await createRecommendation({
       skinLabel: formSkinLabel.value,
       title: formTitle.value,
       body: formBody.value,
@@ -76,13 +77,16 @@ function submitForm() {
   }
 }
 
-function confirmDelete() {
-  if (deleteTarget.value) {
-    if (editingId.value === deleteTarget.value.id) cancelEdit()
-    deleteRecommendation(deleteTarget.value.id)
-  }
+async function confirmDelete() {
+  const target = deleteTarget.value
   deleteTarget.value = null
+  if (target) {
+    if (editingId.value === target.id) cancelEdit()
+    await deleteRecommendation(target.id)
+  }
 }
+
+onMounted(loadRecommendations)
 </script>
 
 <template>

@@ -30,6 +30,7 @@ defineProps<{
     | 'mail'
     | 'home'
     | 'scan'
+    | 'camera'
   size?: number
 }>()
 </script>
@@ -168,6 +169,10 @@ defineProps<{
     <template v-else-if="name === 'scan'">
       <path d="M4 7V5a1 1 0 0 1 1-1h2M17 4h2a1 1 0 0 1 1 1v2M20 17v2a1 1 0 0 1-1 1h-2M7 20H5a1 1 0 0 1-1-1v-2" />
       <path d="M7 12h10" />
+    </template>
+    <template v-else-if="name === 'camera'">
+      <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+      <circle cx="12" cy="13" r="3" />
     </template>
   </svg>
 </template>

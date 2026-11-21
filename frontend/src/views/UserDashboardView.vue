@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import {
-  currentUser,
-  myHistory,
   formatDateShort,
   formatDateFull,
   NON_MEDICAL_DISCLAIMER,
 } from '@/services/mockStore'
+import { currentUser } from '@/services/authStore'
+import { myHistory, loadMyHistory } from '@/services/dataStore'
 import AppShell from '@/components/AppShell.vue'
 import HvIcon from '@/components/HvIcon.vue'
+
+onMounted(loadMyHistory)
 
 const latestCheck = computed(() => myHistory.value[0] ?? null)
 const hydratedCount = computed(

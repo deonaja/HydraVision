@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { currentUser, isAdmin, logoutUser } from '@/services/mockStore'
+import { currentUser, isAdmin, logoutUser } from '@/services/authStore'
 import HvIcon from './HvIcon.vue'
 
 const router = useRouter()

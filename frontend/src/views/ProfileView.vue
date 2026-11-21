@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import {
   currentUser,
-  myHistory,
   updateCurrentProfile,
   logoutUser,
-  formatDateFull,
-} from '@/services/mockStore'
+} from '@/services/authStore'
+import { formatDateFull } from '@/services/mockStore'
+import { getMyHistory } from '@/services/dataStore'
 import AppShell from '@/components/AppShell.vue'
 import HvIcon from '@/components/HvIcon.vue'
 
@@ -19,12 +19,20 @@ const newPassword = ref('')
 const confirmPassword = ref('')
 const errorMessage = ref<string | null>(null)
 const savedNotice = ref(false)
+const historyCount = ref(0)
+
+onMounted(async () => {
+  try {
+    const history = await getMyHistory()
+    historyCount.value = history.length
+  } catch {}
+})
 
 watch(currentUser, (u) => {
   if (u) name.value = u.name
 })
 
-function handleSave() {
+async function handleSave() {
   errorMessage.value = null
   savedNotice.value = false
 
@@ -33,7 +41,7 @@ function handleSave() {
     return
   }
 
-  const res = updateCurrentProfile({
+  const res = await updateCurrentProfile({
     name: name.value,
     currentPassword: currentPassword.value,
     newPassword: newPassword.value,
@@ -50,8 +58,8 @@ function handleSave() {
   savedNotice.value = true
 }
 
-function handleLogout() {
-  logoutUser()
+async function handleLogout() {
+  await logoutUser()
   router.push('/login')
 }
 </script>
@@ -102,7 +110,7 @@ function handleLogout() {
             </div>
             <div>
               <dt>Total Riwayat Klasifikasi</dt>
-              <dd class="tabular">{{ myHistory.length }} catatan</dd>
+              <dd class="tabular">{{ historyCount }} catatan</dd>
             </div>
           </dl>
         </section>

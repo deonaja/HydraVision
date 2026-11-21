@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { registerUser } from '@/services/mockStore'
+import { registerUser, authLoading } from '@/services/authStore'
 import HvIcon from '@/components/HvIcon.vue'
 
 const router = useRouter()
@@ -13,13 +13,13 @@ const confirmPassword = ref('')
 const showPassword = ref(false)
 const errorMessage = ref<string | null>(null)
 
-function submitRegister() {
+async function submitRegister() {
   errorMessage.value = null
   if (password.value !== confirmPassword.value) {
     errorMessage.value = 'Konfirmasi password belum sama dengan password yang dimasukkan.'
     return
   }
-  const result = registerUser({
+  const result = await registerUser({
     name: name.value,
     email: email.value,
     password: password.value,
@@ -124,7 +124,9 @@ function submitRegister() {
             />
           </div>
 
-          <button type="submit" class="btn btn-primary btn-lg submit-btn">Daftar Akun</button>
+          <button type="submit" class="btn btn-primary btn-lg submit-btn" :disabled="authLoading">
+            {{ authLoading ? 'Memproses...' : 'Daftar Akun' }}
+          </button>
         </form>
 
         <p class="auth-switch">

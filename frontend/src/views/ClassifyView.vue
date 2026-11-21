@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import {
   NON_MEDICAL_DISCLAIMER,
   PHOTO_GUIDELINES,
-  runMockClassification,
   stagedLandingUpload,
   validateSkinImageFile,
 } from '@/services/mockStore'
+import { runClassification } from '@/services/dataStore'
 import { createSyntheticSamplePhoto } from '@/services/sampleImages'
 import type { ClassificationRecord } from '@/types/hydravision'
 import AppShell from '@/components/AppShell.vue'
@@ -23,6 +23,121 @@ const errorMessage = ref<string | null>(null)
 const simulateFailure = ref(false)
 const loadingStep = ref('Memvalidasi dimensi dan pencahayaan foto...')
 const resultRecord = ref<ClassificationRecord | null>(null)
+
+// Camera device & capture state
+const isCameraActive = ref(false)
+const isCameraLoading = ref(false)
+const availableCameras = ref<{ deviceId: string; label: string }[]>([])
+const selectedCameraId = ref<string>('')
+const videoRef = ref<HTMLVideoElement | null>(null)
+let mediaStream: MediaStream | null = null
+
+async function startCamera() {
+  errorMessage.value = null
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    errorMessage.value = 'Peramban Anda tidak mendukung akses kamera perangkat.'
+    return
+  }
+
+  isCameraActive.value = true
+  isCameraLoading.value = true
+
+  try {
+    const constraints: MediaStreamConstraints = {
+      video: selectedCameraId.value
+        ? { deviceId: { exact: selectedCameraId.value }, width: { ideal: 1920 }, height: { ideal: 1080 } }
+        : { width: { ideal: 1920 }, height: { ideal: 1080 } },
+      audio: false,
+    }
+
+    const stream = await navigator.mediaDevices.getUserMedia(constraints)
+    mediaStream = stream
+
+    await nextTick()
+    if (videoRef.value) {
+      videoRef.value.srcObject = stream
+      await videoRef.value.play().catch(() => {})
+    }
+
+    const devices = await navigator.mediaDevices.enumerateDevices()
+    const videoInputs = devices.filter((d) => d.kind === 'videoinput')
+    availableCameras.value = videoInputs.map((d, index) => ({
+      deviceId: d.deviceId,
+      label: d.label || `Kamera ${index + 1}`,
+    }))
+
+    const activeTrack = stream.getVideoTracks()[0]
+    if (activeTrack) {
+      const settings = activeTrack.getSettings()
+      if (settings.deviceId) {
+        selectedCameraId.value = settings.deviceId
+      }
+    }
+  } catch (err: any) {
+    isCameraActive.value = false
+    if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+      errorMessage.value = 'Akses kamera tidak diizinkan. Mohon izinkan akses kamera pada peramban Anda.'
+    } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
+      errorMessage.value = 'Perangkat kamera tidak ditemukan.'
+    } else {
+      errorMessage.value = `Gagal membuka kamera: ${err.message || 'Terjadi kesalahan sistem.'}`
+    }
+  } finally {
+    isCameraLoading.value = false
+  }
+}
+
+async function switchCamera() {
+  if (!selectedCameraId.value) return
+  stopCameraStream()
+  await startCamera()
+}
+
+function stopCameraStream() {
+  if (mediaStream) {
+    mediaStream.getTracks().forEach((track) => track.stop())
+    mediaStream = null
+  }
+  if (videoRef.value) {
+    videoRef.value.srcObject = null
+  }
+}
+
+function closeCamera() {
+  stopCameraStream()
+  isCameraActive.value = false
+  isCameraLoading.value = false
+}
+
+function capturePhoto() {
+  if (!videoRef.value) return
+  const video = videoRef.value
+  const width = video.videoWidth || 640
+  const height = video.videoHeight || 480
+
+  const canvas = document.createElement('canvas')
+  canvas.width = width
+  canvas.height = height
+
+  const ctx = canvas.getContext('2d')
+  if (!ctx) {
+    errorMessage.value = 'Gagal memproses gambar dari kamera.'
+    return
+  }
+
+  ctx.drawImage(video, 0, 0, width, height)
+  const dataUrl = canvas.toDataURL('image/jpeg', 0.95)
+
+  const timestamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-')
+  fileName.value = `kamera-kulit-${timestamp}.jpg`
+  previewDataUrl.value = dataUrl
+
+  closeCamera()
+}
+
+onBeforeUnmount(() => {
+  stopCameraStream()
+})
 
 onMounted(() => {
   if (stagedLandingUpload.dataUrl && stagedLandingUpload.fileName) {
@@ -70,6 +185,7 @@ function clearPhoto() {
   fileName.value = null
   previewDataUrl.value = null
   errorMessage.value = null
+  closeCamera()
 }
 
 function loadDemoSample(variant: 'hydrated-1' | 'dry-1') {
@@ -91,7 +207,7 @@ async function processClassification() {
     loadingStep.value = 'Menganalisis tekstur dan tingkat hidrasi kulit...'
   }, 650)
 
-  const res = await runMockClassification({
+  const res = await runClassification({
     fileName: fileName.value,
     imageDataUrl: previewDataUrl.value,
     simulateError: simulateFailure.value,
@@ -150,7 +266,7 @@ function resetForNewCheck() {
           />
 
           <div
-            v-if="!previewDataUrl"
+            v-if="!previewDataUrl && !isCameraActive"
             class="vanity-tray-well drop-well"
             :class="{ 'is-dragging': isDragging }"
             @dragover.prevent="isDragging = true"
@@ -161,11 +277,18 @@ function resetForNewCheck() {
               <span class="drop-icon" aria-hidden="true">
                 <HvIcon name="upload" :size="30" />
               </span>
-              <h2>Unggah Foto Kulit dari Perangkat</h2>
-              <p>Tarik foto ke area ini atau pilih berkas. Format JPG, JPEG, atau PNG (maks 5 MB).</p>
-              <button type="button" class="btn btn-primary btn-lg" @click.stop="openPicker">
-                Pilih Foto Kulit
-              </button>
+              <h2>Pilih atau Ambil Foto Kulit</h2>
+              <p>Tarik foto ke area ini, unggah berkas (JPG/PNG maks 5 MB), atau gunakan kamera langsung.</p>
+              <div class="drop-actions-row">
+                <button type="button" class="btn btn-primary btn-lg" @click.stop="openPicker">
+                  <HvIcon name="upload" :size="18" />
+                  <span>Pilih Berkas Foto</span>
+                </button>
+                <button type="button" class="btn btn-clay btn-lg" @click.stop="startCamera">
+                  <HvIcon name="camera" :size="18" />
+                  <span>Buka Kamera / Capture</span>
+                </button>
+              </div>
             </div>
 
             <div class="sample-bar">
@@ -189,8 +312,76 @@ function resetForNewCheck() {
             </div>
           </div>
 
+          <!-- Camera Live Viewfinder State -->
+          <div
+            v-else-if="!previewDataUrl && isCameraActive"
+            class="vanity-tray-well camera-well"
+          >
+            <div class="camera-dish">
+              <div class="camera-header">
+                <div class="camera-select-wrap">
+                  <label for="camera-select" class="camera-select-label">
+                    <HvIcon name="camera" :size="16" />
+                    <span>Pilihan Kamera:</span>
+                  </label>
+                  <select
+                    id="camera-select"
+                    v-model="selectedCameraId"
+                    class="camera-select"
+                    @change="switchCamera"
+                  >
+                    <option
+                      v-for="cam in availableCameras"
+                      :key="cam.deviceId"
+                      :value="cam.deviceId"
+                    >
+                      {{ cam.label }}
+                    </option>
+                  </select>
+                </div>
+                <button type="button" class="btn btn-ceramic btn-sm" @click="closeCamera">
+                  <HvIcon name="x" :size="15" />
+                  <span>Tutup Kamera</span>
+                </button>
+              </div>
+
+              <div class="camera-viewfinder">
+                <video
+                  ref="videoRef"
+                  autoplay
+                  playsinline
+                  muted
+                  class="camera-video"
+                ></video>
+                <div class="viewfinder-overlay">
+                  <div class="target-bracket target-tl"></div>
+                  <div class="target-bracket target-tr"></div>
+                  <div class="target-bracket target-bl"></div>
+                  <div class="target-bracket target-br"></div>
+                  <span class="target-hint">Posisikan area kulit di dalam kotak fokus</span>
+                </div>
+                <div v-if="isCameraLoading" class="camera-loader">
+                  <HvIcon name="refresh" :size="24" class="spin-icon" />
+                  <span>Mengakses kamera perangkat...</span>
+                </div>
+              </div>
+
+              <div class="camera-actions">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-lg capture-btn"
+                  :disabled="isCameraLoading"
+                  @click="capturePhoto"
+                >
+                  <HvIcon name="camera" :size="19" />
+                  <span>Ambil Foto Kulit (Capture)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
           <!-- FR-10 & FR-11: Preview + Replace/Remove before classification -->
-          <div v-else class="vanity-tray-well preview-well">
+          <div v-else-if="previewDataUrl" class="vanity-tray-well preview-well">
             <div class="preview-dish">
               <div class="preview-image-box">
                 <img :src="previewDataUrl" :alt="`Pratinjau ${fileName}`" class="preview-img" />
@@ -204,12 +395,16 @@ function resetForNewCheck() {
 
                 <div class="preview-actions">
                   <button type="button" class="btn btn-ceramic" @click="openPicker">
-                    <HvIcon name="refresh" :size="16" />
-                    <span>Ganti Foto</span>
+                    <HvIcon name="upload" :size="16" />
+                    <span>Ganti Berkas</span>
+                  </button>
+                  <button type="button" class="btn btn-clay" @click="startCamera">
+                    <HvIcon name="camera" :size="16" />
+                    <span>Ambil Ulang via Kamera</span>
                   </button>
                   <button type="button" class="btn btn-danger" @click="clearPhoto">
                     <HvIcon name="trash" :size="16" />
-                    <span>Hapus Foto</span>
+                    <span>Hapus</span>
                   </button>
                 </div>
 
@@ -446,6 +641,187 @@ function resetForNewCheck() {
   color: rgba(251, 246, 240, 0.88);
   max-width: 44ch;
   font-size: 0.9375rem;
+}
+
+.drop-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+/* Camera Viewfinder Styles */
+.camera-well {
+  padding: 20px;
+}
+
+.camera-dish {
+  width: 100%;
+  min-width: 0;
+  background: var(--ceramic-ivory);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  box-shadow: var(--shadow-dish);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.camera-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.camera-select-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 220px;
+}
+
+.camera-select-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink-espresso);
+  white-space: nowrap;
+}
+
+.camera-select {
+  flex: 1;
+  padding: 7px 12px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--ceramic-border);
+  background: #fff;
+  font-size: 0.875rem;
+  color: var(--ink-espresso);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.camera-select:focus {
+  outline: none;
+  border-color: var(--indigo-primary);
+  box-shadow: 0 0 0 2px var(--indigo-tint);
+}
+
+.camera-viewfinder {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--clay-body);
+}
+
+.camera-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.viewfinder-overlay {
+  position: absolute;
+  inset: 15%;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.target-bracket {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 2.5px solid rgba(255, 255, 255, 0.85);
+}
+
+.target-tl {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.target-tr {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.target-bl {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+.target-br {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+.target-hint {
+  font-size: 0.8rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.65);
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
+.camera-loader {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.spin-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.camera-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.capture-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .sample-bar {
