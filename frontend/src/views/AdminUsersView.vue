@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { formatDateFull } from '@/services/mockStore'
 import {
   storeState,
+  loadAdminUsers,
   setUserAccountStatus,
   deleteUserAccount,
-  formatDateFull,
-} from '@/services/mockStore'
+} from '@/services/dataStore'
 import type { UserAccount } from '@/types/hydravision'
 import AppShell from '@/components/AppShell.vue'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
@@ -38,21 +39,23 @@ const selectedUser = computed(
 )
 
 function countChecks(userId: string) {
-  return storeState.history.filter((h) => h.userId === userId).length
+  return storeState.users.find((u) => u.id === userId)?.checksCount ?? 0
 }
 
-function executeConfirmedAction() {
+onMounted(loadAdminUsers)
+
+async function executeConfirmedAction() {
   if (!confirmAction.value) return
   const { type, user } = confirmAction.value
-  if (type === 'deactivate') {
-    setUserAccountStatus(user.id, 'inactive')
-  } else if (type === 'activate') {
-    setUserAccountStatus(user.id, 'active')
-  } else if (type === 'delete') {
-    deleteUserAccount(user.id)
-    if (selectedUserId.value === user.id) selectedUserId.value = null
-  }
   confirmAction.value = null
+  if (type === 'deactivate') {
+    await setUserAccountStatus(user.id, 'inactive')
+  } else if (type === 'activate') {
+    await setUserAccountStatus(user.id, 'active')
+  } else if (type === 'delete') {
+    const ok = await deleteUserAccount(user.id)
+    if (ok && selectedUserId.value === user.id) selectedUserId.value = null
+  }
 }
 </script>
 

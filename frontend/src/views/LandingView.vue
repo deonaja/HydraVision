@@ -2,13 +2,12 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import {
-  isAuthenticated,
-  isAdmin,
   NON_MEDICAL_DISCLAIMER,
   PHOTO_GUIDELINES,
   stagedLandingUpload,
   validateSkinImageFile,
 } from '@/services/mockStore'
+import { isAuthenticated, isAdmin } from '@/services/authStore'
 import HvIcon from '@/components/HvIcon.vue'
 
 interface SampleStripItem {

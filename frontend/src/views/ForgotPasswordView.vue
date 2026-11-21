@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { requestPasswordReset, completePasswordReset } from '@/services/mockStore'
+import { requestPasswordReset, completePasswordReset } from '@/services/authStore'
 import HvIcon from '@/components/HvIcon.vue'
 
 const router = useRouter()
@@ -14,9 +14,9 @@ const newPassword = ref('')
 const confirmPassword = ref('')
 const errorMessage = ref<string | null>(null)
 
-function handleRequest() {
+async function handleRequest() {
   errorMessage.value = null
-  const result = requestPasswordReset(email.value)
+  const result = await requestPasswordReset(email.value)
   if (!result.ok) {
     errorMessage.value = result.error
     return
@@ -25,13 +25,13 @@ function handleRequest() {
   step.value = 'sent'
 }
 
-function handleResetPassword() {
+async function handleResetPassword() {
   errorMessage.value = null
   if (newPassword.value !== confirmPassword.value) {
     errorMessage.value = 'Konfirmasi password baru tidak sama.'
     return
   }
-  const result = completePasswordReset(newPassword.value)
+  const result = await completePasswordReset(newPassword.value)
   if (!result.ok) {
     errorMessage.value = result.error
     return

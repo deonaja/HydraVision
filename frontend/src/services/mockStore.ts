@@ -492,7 +492,7 @@ export async function runMockClassification(params: {
   return { ok: true, record }
 }
 
-function analyzeImageHeuristic(dataUrl: string): Promise<{ label: SkinLabel; confidence: number }> {
+export function analyzeImageHeuristic(dataUrl: string): Promise<{ label: SkinLabel; confidence: number }> {
   return new Promise((resolve) => {
     const img = new Image()
     img.onload = () => {
@@ -628,6 +628,7 @@ export function deleteRecommendation(id: string) {
 
 export function formatDateShort(iso: string): string {
   const d = new Date(iso)
+  if (!iso || isNaN(d.getTime())) return '-'
   return new Intl.DateTimeFormat('id-ID', {
     day: '2-digit',
     month: 'short',
@@ -636,6 +637,7 @@ export function formatDateShort(iso: string): string {
 
 export function formatDateFull(iso: string): string {
   const d = new Date(iso)
+  if (!iso || isNaN(d.getTime())) return '-'
   return new Intl.DateTimeFormat('id-ID', {
     day: '2-digit',
     month: 'long',

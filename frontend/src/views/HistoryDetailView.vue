@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import {
-  getHistoryRecord,
-  deleteHistoryRecord,
-  formatDateFull,
-  NON_MEDICAL_DISCLAIMER,
-} from '@/services/mockStore'
+import { formatDateFull, NON_MEDICAL_DISCLAIMER } from '@/services/mockStore'
+import { getHistoryRecord, deleteHistoryRecord } from '@/services/dataStore'
+import type { ClassificationRecord } from '@/types/hydravision'
 import AppShell from '@/components/AppShell.vue'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import HvIcon from '@/components/HvIcon.vue'
@@ -14,17 +11,24 @@ import HvIcon from '@/components/HvIcon.vue'
 const route = useRoute()
 const router = useRouter()
 const confirmOpen = ref(false)
+const loading = ref(true)
+const record = ref<ClassificationRecord | null>(null)
 
-const record = computed(() => {
-  const id = typeof route.params.id === 'string' ? route.params.id : ''
-  return getHistoryRecord(id)
-})
+watch(
+  () => route.params.id,
+  async (id) => {
+    loading.value = true
+    record.value = typeof id === 'string' ? await getHistoryRecord(id) : null
+    loading.value = false
+  },
+  { immediate: true },
+)
 
-function handleDelete() {
+async function handleDelete() {
   if (!record.value) return
-  deleteHistoryRecord(record.value.id)
   confirmOpen.value = false
-  router.push('/history')
+  const ok = await deleteHistoryRecord(record.value.id)
+  if (ok) router.push('/history')
 }
 </script>
 
@@ -127,6 +131,10 @@ function handleDelete() {
           @cancel="confirmOpen = false"
         />
       </template>
+
+      <section v-else-if="loading" class="ceramic-panel not-found">
+        <p>Memuat detail riwayat...</p>
+      </section>
 
       <section v-else class="ceramic-panel not-found">
         <h1>Riwayat tidak ditemukan</h1>

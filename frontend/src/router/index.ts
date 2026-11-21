@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { isAuthenticated, isAdmin } from '@/services/mockStore'
+import { isAuthenticated, isAdmin } from '@/services/authStore'
 
 import LandingView from '@/views/LandingView.vue'
 import LoginView from '@/views/LoginView.vue'

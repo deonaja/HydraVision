@@ -1,8 +1,23 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { storeState, currentUser, myHistory } from '@/services/mockStore'
+import { computed, onMounted } from 'vue'
+import { currentUser } from '@/services/authStore'
+import {
+  storeState,
+  myHistory,
+  loadAdminUsers,
+  loadAdminDashboard,
+  loadRecommendations,
+  loadMyHistory,
+} from '@/services/dataStore'
 import AppShell from '@/components/AppShell.vue'
 import HvIcon from '@/components/HvIcon.vue'
+
+onMounted(() => {
+  loadAdminUsers()
+  loadAdminDashboard()
+  loadRecommendations()
+  loadMyHistory()
+})
 
 const managedUsers = computed(() => storeState.users.filter((u) => u.role === 'user'))
 const activeUsers = computed(() => managedUsers.value.filter((u) => u.status === 'active').length)
@@ -57,7 +72,7 @@ const dryRecs = computed(
         </div>
         <div class="summary-cell">
           <span class="summary-label">Total Klasifikasi Tersimpan</span>
-          <strong class="summary-value tabular">{{ storeState.history.length }}</strong>
+          <strong class="summary-value tabular">{{ storeState.totalScans }}</strong>
           <span class="summary-sub tabular">{{ myHistory.length }} milik akun admin</span>
         </div>
       </section>

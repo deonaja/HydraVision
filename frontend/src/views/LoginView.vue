@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { loginUser } from '@/services/mockStore'
+import { loginUser, authLoading } from '@/services/authStore'
 import HvIcon from '@/components/HvIcon.vue'
 
 const router = useRouter()
@@ -23,9 +23,9 @@ function fillDemo(role: 'user' | 'admin') {
   }
 }
 
-function submitLogin() {
+async function submitLogin() {
   errorMessage.value = null
-  const result = loginUser({ email: email.value, password: password.value })
+  const result = await loginUser({ email: email.value, password: password.value })
   if (!result.ok) {
     errorMessage.value = result.error
     return
@@ -142,7 +142,9 @@ function submitLogin() {
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-lg submit-btn">Masuk</button>
+            <button type="submit" class="btn btn-primary btn-lg submit-btn" :disabled="authLoading">
+              {{ authLoading ? 'Memproses...' : 'Masuk' }}
+            </button>
           </form>
 
           <p class="auth-switch">
