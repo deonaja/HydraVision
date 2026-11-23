@@ -32,8 +32,9 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 });
 
-// History
+// History & Classification
 Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/classify',     [HistoryController::class, 'classify']);
     Route::get('/history',       [HistoryController::class, 'index']);
     Route::post('/history',      [HistoryController::class, 'store']);
     Route::get('/history/{id}',  [HistoryController::class, 'show']);

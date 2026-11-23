@@ -206,7 +206,7 @@ export async function deleteHistoryRecord(id: string): Promise<boolean> {
 }
 
 /* ================= CLASSIFICATION ================= */
-// Analisis heuristik di browser (belum model AI), hasil disimpan ke backend.
+// Mengirim foto ke backend Laravel, yang akan memproses inferensi via microservice MobileNetV4
 export async function runClassification(params: {
   fileName: string
   imageDataUrl: string
@@ -216,28 +216,26 @@ export async function runClassification(params: {
     return { ok: false, error: 'Anda harus login untuk menjalankan klasifikasi.' }
   }
 
-  const analysis = await analyzeImageHeuristic(params.imageDataUrl)
-  await new Promise((resolve) => window.setTimeout(resolve, 1200))
-
   if (params.simulateError) {
+    await new Promise((resolve) => window.setTimeout(resolve, 800))
     return {
       ok: false,
       error:
-        'Proses klasifikasi gagal karena layanan analisis tidak merespons (simulasi error). Periksa foto Anda lalu coba unggah atau proses ulang.',
+        'Proses klasifikasi gagal karena simulasi error diaktifkan. Periksa foto Anda lalu coba proses ulang.',
     }
   }
 
   try {
-    const record = await saveHistoryRecord({
-      fileName: params.fileName,
-      imageDataUrl: params.imageDataUrl,
-      label: analysis.label,
-      confidence: analysis.confidence,
-      isSimulated: true,
+    const res = await api.post('/classify', {
+      file_name: params.fileName,
+      image_data_url: params.imageDataUrl,
     })
+    const record = mapRecord(res.data.data ?? res.data)
+    myHistory.value = [record, ...myHistory.value]
+    pushToast(`Klasifikasi MobileNetV4 selesai (${record.label} · ${record.confidence}%). Tersimpan ke riwayat.`, 'success')
     return { ok: true, record }
   } catch (err: any) {
-    return { ok: false, error: errMsg(err, 'Gagal menyimpan hasil klasifikasi ke server.') }
+    return { ok: false, error: errMsg(err, 'Gagal melakukan klasifikasi gambar dengan model MobileNetV4.') }
   }
 }
 
